@@ -1,2 +1,2 @@
-data/frames/fake/**/*.jpg filter=lfs diff=lfs merge=lfs -text
-data/frames/real/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+
+*.jpg filter=lfs diff=lfs merge=lfs -text
