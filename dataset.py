@@ -27,8 +27,8 @@ class DeepfakeDataset(Dataset):
         return len(self.data)
 
     def __getitem__(self, idx):
-        img_name = os.path.join(self.root_dir, self.data.iloc[idx, 0])
-        image = Image.open(img_name).convert('RGB')
+        img_path = os.path.join(self.root_dir, self.data.iloc[idx, 0])
+        image = Image.open(img_path).convert('RGB')
         label_str = self.data.iloc[idx, 1]  # 'FAKE' or 'REAL'
         label = self.label_map[label_str]
 

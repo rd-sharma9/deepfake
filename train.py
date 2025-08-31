@@ -21,7 +21,7 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 CSV_DIR = r"D:\deepfake-detector"
 TRAIN_CSV = os.path.join(CSV_DIR, "train.csv")
 VAL_CSV = os.path.join(CSV_DIR, "val.csv")
-ROOT_DIR = r"D:\deepfake-detector\frames"  # <-- change to your frames folder
+ROOT_DIR = r"C:\Users\ASUS\OneDrive\Desktop\deepfake-detector\data\faces"
 
 # ==============================
 # Load Data

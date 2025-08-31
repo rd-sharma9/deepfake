@@ -1,5 +1,13 @@
-import pandas as pd
+import os
 
-df = pd.read_csv(r"D:\deepfake-detector\faceforensic++\csv\all_data.csv")
-print(df["Label"].value_counts())   # Fake vs Real
-print(df.groupby("Label")["File Path"].count())   # same thing
+dataset_path = r"C:\Users\ASUS\OneDrive\Desktop\deepfake-detector\data\frames"
+
+real_path = os.path.join(dataset_path, "real")
+fake_path = os.path.join(dataset_path, "fake")
+
+# Count frames inside all subfolders
+real_count = sum([len(files) for r, d, files in os.walk(real_path)])
+fake_count = sum([len(files) for r, d, files in os.walk(fake_path)])
+
+print(f"Total REAL frames: {real_count}")
+print(f"Total FAKE frames: {fake_count}")
