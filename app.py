@@ -1,5 +1,26 @@
-# app.py
+# ap
+
 import streamlit as st
+
+try:
+    # Your existing app code starts here
+    
+    st.title("My Deepfake Detector")
+    
+    uploaded_file = st.file_uploader("Upload a video", type=["mp4"])
+    if uploaded_file is not None:
+        st.video(uploaded_file)
+        # More code for your detection...
+    
+    # Continue with the rest of your app
+
+except Exception as e:
+    st.error(f"Error: {e}")
+
+
+
+
+
 import torch
 import torch.nn as nn
 from torchvision import models, transforms
