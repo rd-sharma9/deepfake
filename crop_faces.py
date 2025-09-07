@@ -24,6 +24,10 @@ for label in ["real", "fake"]:
             img_path = os.path.join(subfolder_in, file)
             save_path = os.path.join(subfolder_out, file)
 
+            # ✅ Skip if face already extracted
+            if os.path.exists(save_path):
+                continue
+
             img = cv2.imread(img_path)
             if img is None:
                 continue
@@ -31,6 +35,7 @@ for label in ["real", "fake"]:
             faces = detector.detect_faces(img)
             if faces:
                 # take the largest detected face
+                faces = sorted(faces, key=lambda f: f['box'][2] * f['box'][3], reverse=True)
                 x, y, w, h = faces[0]["box"]
                 x, y = max(0, x), max(0, y)
                 cropped = img[y:y+h, x:x+w]
