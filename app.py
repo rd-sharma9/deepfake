@@ -18,13 +18,7 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 def main():
     st.title("🕵️ Deepfake Detector")
 
-    # Video upload section (if needed)
-    uploaded_video = st.file_uploader("Upload a video (optional)", type=["mp4"])
-    if uploaded_video is not None:
-        st.video(uploaded_video)
-        st.info("Video uploaded! Detection logic can be added here.")
-
-    # Image upload section
+    # ✅ Only image upload
     st.write("Upload an image and let the model predict if it's **FAKE** or **REAL**.")
     uploaded_image = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
@@ -35,7 +29,12 @@ def main():
     def load_model():
         model = models.resnet18(weights=None)
         model.fc = nn.Linear(model.fc.in_features, 2)
-        model.load_state_dict(torch.load(MODEL_PATH, map_location=DEVICE))
+
+        state_dict = torch.load(MODEL_PATH, map_location=DEVICE)
+
+        # ✅ Handle strict=False in case state_dict has extra keys
+        model.load_state_dict(state_dict, strict=False)
+
         model.to(DEVICE)
         model.eval()
         return model
